@@ -411,17 +411,17 @@ namespace imgui_app
 
 	bool select_platform()
 	{
-		return imgui_app_fw::select_platform();
+		return imgui_app_fw()->select_platform();
 	}
 
 	void set_window_title(const char* title)
 	{
-		return imgui_app_fw::set_window_title(title);
+		return imgui_app_fw()->set_window_title(title);
 	}
 
 	bool init()
 	{
-		if (imgui_app_fw::init())
+		if (imgui_app_fw()->init())
 		{
 			logger()->init();
 			return true;
@@ -431,24 +431,24 @@ namespace imgui_app
 
 	bool pump()
 	{
-		return imgui_app_fw::pump();
+		return imgui_app_fw()->pump();
 	}
 
 	void begin_frame()
 	{
-		imgui_app_fw::begin_frame();
+		imgui_app_fw()->begin_frame();
 	}
 
 	void end_frame(ImVec4 clear_color)
 	{
 		logger()->draw();
-		imgui_app_fw::end_frame(clear_color);
+		imgui_app_fw()->end_frame(clear_color);
 	}
 
 	void destroy()
 	{
 		logger()->destroy();
-		imgui_app_fw::destroy();
+		imgui_app_fw()->destroy();
 	}
 
 	void log(const char* text) noexcept
