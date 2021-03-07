@@ -23,7 +23,7 @@ if (NOT DEFINED CPM_SCRIPTS)
 	CPMAddPackage(
 	  NAME cpmpckg
 	  GITHUB_REPOSITORY loopunit/cpmpckg
-	  GIT_TAG 9d5271a66365729b54588d166ec672d7db0a039c
+	  GIT_TAG 10daafe97294a85d6618266d08fbfaba27d5381f
 	  DOWNLOAD_ONLY true)
 
 	include(${cpmpckg_SOURCE_DIR}/cmake/add_cpm_module.cmake)
@@ -196,7 +196,7 @@ list(APPEND imgui_private_include_paths ${PROJECT_BINARY_DIR}/include)
 
 add_library(imgui_app STATIC ${imgui_app_sources})
 
-target_link_libraries(imgui_app PUBLIC cpm_runtime::imgui_addons cpm_runtime::imgui_app_fw)
+target_link_libraries(imgui_app PUBLIC cpm_install::imgui_addons cpm_install::imgui_app_fw)
 
 target_include_directories(imgui_app PRIVATE ${imgui_private_include_paths} ${CMAKE_CURRENT_LIST_DIR}/src)
 
