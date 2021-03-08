@@ -409,46 +409,46 @@ namespace imgui_app
 {
 	using logger = singleton<details::logger>;
 
-	bool select_platform()
+	mu::leaf::result<void> select_platform()
 	{
 		return imgui_app_fw()->select_platform();
 	}
 
-	void set_window_title(const char* title)
+	mu::leaf::result<void> set_window_title(const char* title)
 	{
 		return imgui_app_fw()->set_window_title(title);
 	}
 
-	bool init()
+	mu::leaf::result<void> init()
 	{
 		if (imgui_app_fw()->init())
 		{
 			logger()->init();
-			return true;
+			return {};
 		}
-		return false;
+		return {};
 	}
 
-	bool pump()
+	mu::leaf::result<bool> pump()
 	{
 		return imgui_app_fw()->pump();
 	}
 
-	void begin_frame()
+	mu::leaf::result<void> begin_frame()
 	{
-		imgui_app_fw()->begin_frame();
+		return imgui_app_fw()->begin_frame();
 	}
 
-	void end_frame(ImVec4 clear_color)
+	mu::leaf::result<void> end_frame(ImVec4 clear_color)
 	{
 		logger()->draw();
-		imgui_app_fw()->end_frame(clear_color);
+		return imgui_app_fw()->end_frame(clear_color);
 	}
 
-	void destroy()
+	mu::leaf::result<void> destroy()
 	{
 		logger()->destroy();
-		imgui_app_fw()->destroy();
+		return imgui_app_fw()->destroy();
 	}
 
 	void log(const char* text) noexcept

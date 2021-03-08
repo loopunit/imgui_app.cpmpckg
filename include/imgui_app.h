@@ -471,13 +471,13 @@ namespace imgui_app
 
 namespace imgui_app
 {
-	bool select_platform();
-	void set_window_title(const char* title);
-	bool init();
-	bool pump();
-	void begin_frame();
-	void end_frame(ImVec4 clear_color);
-	void destroy();
+	mu::leaf::result<void> select_platform();
+	mu::leaf::result<void> set_window_title(const char* title);
+	mu::leaf::result<void> init();
+	mu::leaf::result<bool> pump();
+	mu::leaf::result<void> begin_frame();
+	mu::leaf::result<void> end_frame(ImVec4 clear_color);
+	mu::leaf::result<void> destroy();
 
 	void log(const char* text) noexcept;
 	void log_warning(const char* text) noexcept;
