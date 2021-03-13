@@ -15,21 +15,22 @@ include(ExternalProject)
 
 ####
 
-if (NOT DEFINED CPM_SCRIPTS)
+if (NOT DEFINED cpmpckg_SOURCE_DIR)
 	include(cmake/CPM.cmake)
 
 	# One frustrating part of this project setup is the circular dependency between cpmpckg and this repo.
 	# GIT_TAG will always lag cpmpckg @ HEAD when this project is updated there.
 	CPMAddPackage(
-	  NAME cpmpckg
-	  GITHUB_REPOSITORY loopunit/cpmpckg
-	  GIT_TAG 57f2899ed3922bc4d5d7c0fc93c37de69c12c52f
-	  DOWNLOAD_ONLY true)
+		NAME cpmpckg
+		GITHUB_REPOSITORY loopunit/cpmpckg
+		GIT_TAG 57f2899ed3922bc4d5d7c0fc93c37de69c12c52f
+		DOWNLOAD_ONLY true)
 
 	include(${cpmpckg_SOURCE_DIR}/cmake/add_cpm_module.cmake)
 else()
-	include(${CPM_SCRIPTS}/CPM.cmake)
-	include(${CPM_SCRIPTS}/add_cpm_module.cmake)
+	set(CPM_SCRIPTS ${cpmpckg_SOURCE_DIR}/cmake)
+	include(${cpmpckg_SOURCE_DIR}/cmake/CPM.cmake)
+	include(${cpmpckg_SOURCE_DIR}/cmake/add_cpm_module.cmake)
 endif()
 
 ####
