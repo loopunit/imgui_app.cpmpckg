@@ -14,7 +14,8 @@ namespace imgui_app
 	{
 		static messagebox_result async_show_messagebox(std::string message, std::string title, messagebox_style style, messagebox_buttons buttons)
 		{
-			auto convert_style = [style]() {
+			auto convert_style = [style]()
+			{
 				switch (style)
 				{
 				case messagebox_style::info:
@@ -29,7 +30,8 @@ namespace imgui_app
 				};
 			};
 
-			auto convert_buttons = [buttons]() {
+			auto convert_buttons = [buttons]()
+			{
 				switch (buttons)
 				{
 				case messagebox_buttons::ok:
@@ -339,7 +341,7 @@ namespace imgui_app
 				}
 			}
 
-			~logger() {}
+			~logger() { }
 
 			void log_impl(std::string_view text, csys::ItemType type) noexcept
 			{
@@ -398,9 +400,9 @@ namespace imgui_app
 				_console.Draw();
 			}
 
-			void init() {}
+			void init() { }
 
-			void destroy() noexcept {}
+			void destroy() noexcept { }
 		};
 	} // namespace details
 } // namespace imgui_app

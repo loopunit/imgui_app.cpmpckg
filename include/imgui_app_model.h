@@ -54,7 +54,13 @@ struct app_model
 			template<typename T_FUNC>
 			void set_impl_call(T_FUNC func)
 			{
-				m_operation_future = operation_future{true, std::async(std::launch::async, [func]() { return func(); })};
+				m_operation_future = operation_future{
+					true, std::async(
+							  std::launch::async,
+							  [func]()
+							  {
+								  return func();
+							  })};
 			}
 
 			virtual void react(typename model_events::update const& evt)
@@ -533,9 +539,9 @@ struct app_model
 				// TODO
 			}
 
-			virtual void entry() {}
+			virtual void entry() { }
 
-			virtual void exit() {}
+			virtual void exit() { }
 		};
 
 		template<typename T_SHUTDOWN, typename T_ON_NEW, typename T_ON_OPEN>
@@ -786,7 +792,7 @@ struct app_model
 
 			struct report_error : application_model_utils::messagebox_quit<T_EXIT, fsm>
 			{
-				report_error() {}
+				report_error() { }
 
 				virtual void entry()
 				{
@@ -872,7 +878,7 @@ struct app_model
 
 		struct bootstrap : application_model_utils::async<shutdown, substate_empty, fsm>
 		{
-			bootstrap() {}
+			bootstrap() { }
 
 			virtual void entry()
 			{
@@ -884,7 +890,7 @@ struct app_model
 		// terminal
 		struct terminated : fsm
 		{
-			terminated() {}
+			terminated() { }
 
 			virtual void entry()
 			{
@@ -894,7 +900,7 @@ struct app_model
 
 		struct shutdown : application_model_utils::async<terminated, terminated, fsm>
 		{
-			shutdown() {}
+			shutdown() { }
 
 			virtual void entry()
 			{

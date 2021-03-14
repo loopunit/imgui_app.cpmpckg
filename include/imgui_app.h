@@ -51,7 +51,8 @@ namespace imgui_app
 
 			static_root_singleton()
 			{
-				static bool static_init = []() -> bool {
+				static bool static_init = []() -> bool
+				{
 					s_instance = new (&s_instance_memory[0]) T();
 					std::atexit(destroy);
 					return true;
@@ -214,12 +215,15 @@ namespace imgui_app
 
 			singleton_base()
 			{
-				static bool static_init = []() -> bool {
+				static bool static_init = []() -> bool
+				{
 					s_instance = factory::create();
-					singleton_cleanup_root()->push([]() -> void {
-						delete s_instance;
-						s_instance = nullptr;
-					});
+					singleton_cleanup_root()->push(
+						[]() -> void
+						{
+							delete s_instance;
+							s_instance = nullptr;
+						});
 					return true;
 				}();
 			}
@@ -274,7 +278,8 @@ namespace imgui_app
 
 		exported_singleton()
 		{
-			static bool static_init = []() -> bool {
+			static bool static_init = []() -> bool
+			{
 				s_instance = get_instance();
 				return true;
 			}();
@@ -327,7 +332,8 @@ namespace imgui_app
 
 			static_root_thread_local_singleton()
 			{
-				static bool static_init = []() -> bool {
+				static bool static_init = []() -> bool
+				{
 					s_instance = new (&s_instance_memory[0]) T();
 					std::atexit(destroy);
 					return true;
@@ -388,12 +394,15 @@ namespace imgui_app
 
 			thread_local_singleton_base()
 			{
-				static thread_local bool static_init = []() -> bool {
+				static thread_local bool static_init = []() -> bool
+				{
 					s_instance = new T();
-					thread_local_singleton_cleanup_root()->push([]() -> void {
-						delete s_instance;
-						s_instance = nullptr;
-					});
+					thread_local_singleton_cleanup_root()->push(
+						[]() -> void
+						{
+							delete s_instance;
+							s_instance = nullptr;
+						});
 					return true;
 				}();
 			}
@@ -447,7 +456,8 @@ namespace imgui_app
 
 		exported_thread_local_singleton()
 		{
-			static thread_local bool static_init = []() -> bool {
+			static thread_local bool static_init = []() -> bool
+			{
 				s_instance = get_instance();
 				return true;
 			}();
@@ -607,10 +617,14 @@ namespace imgui_app
 	using timer_future = details::future_helper<std::future<int>>;
 	inline timer_future set_timer_for_msecs(const int msecs)
 	{
-		return {true, std::async(std::launch::async, [msecs]() {
-					std::this_thread::sleep_for(std::chrono::milliseconds(msecs));
-					return 0;
-				})};
+		return {
+			true, std::async(
+					  std::launch::async,
+					  [msecs]()
+					  {
+						  std::this_thread::sleep_for(std::chrono::milliseconds(msecs));
+						  return 0;
+					  })};
 	}
 
 } // namespace imgui_app

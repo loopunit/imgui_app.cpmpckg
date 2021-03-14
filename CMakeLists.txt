@@ -6,7 +6,6 @@ project(imgui_app
 include(CMakeDependentOption)
 
 option(IMGUI_BUILD_EXAMPLES "Build examples." OFF)
-cmake_dependent_option(IMGUI_BUILD_APP_FW "Build app framework." OFF "IMGUI_BUILD_EXAMPLES" ON)
 
 # ---- Add dependencies via CPM ----
 # see https://github.com/TheLartians/CPM.cmake for more info
@@ -23,7 +22,7 @@ if (NOT DEFINED cpmpckg_SOURCE_DIR)
 	CPMAddPackage(
 		NAME cpmpckg
 		GITHUB_REPOSITORY loopunit/cpmpckg
-		GIT_TAG 72ee31a763dca7ba16557e481da81d0644658caf
+		GIT_TAG d92021769936a770f8eccc41b19e24f0bf606ff6
 		DOWNLOAD_ONLY true)
 
 	include(${cpmpckg_SOURCE_DIR}/cmake/add_cpm_module.cmake)
@@ -225,20 +224,20 @@ packageProject(
 	# semicolon separated list of the project's dependencies
 	DEPENDENCIES "")
   
-if(CPM_BUILD_TEST)
-	file(GLOB example_sources 
-		${CMAKE_CURRENT_SOURCE_DIR}/examples/app_main.cpp)
-
-	add_executable(imgui_app_example
-		${example_sources})
-    
-	set_target_properties(imgui_app_example PROPERTIES CXX_STANDARD 17)
-
-	target_include_directories(imgui_app_example
-		PRIVATE 
-			${imgui_SOURCE_DIR}/examples)
-    
-	target_link_libraries(imgui_app_example
-		PUBLIC
-			imgui_app)
-endif()
+#if(CPM_BUILD_TEST)
+#	file(GLOB example_sources 
+#		${CMAKE_CURRENT_SOURCE_DIR}/examples/app_main.cpp)
+#
+#	add_executable(imgui_app_example
+#		${example_sources})
+#    
+#	set_target_properties(imgui_app_example PROPERTIES CXX_STANDARD 17)
+#
+#	target_include_directories(imgui_app_example
+#		PRIVATE 
+#			${imgui_SOURCE_DIR}/examples)
+#    
+#	target_link_libraries(imgui_app_example
+#		PUBLIC
+#			imgui_app)
+#endif()
