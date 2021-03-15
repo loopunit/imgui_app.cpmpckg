@@ -224,6 +224,16 @@ packageProject(
 	# semicolon separated list of the project's dependencies
 	DEPENDENCIES "")
   
+if(MSVC)
+  if("${CMAKE_BUILD_TYPE}" STREQUAL "Debug")
+    set_target_properties(imgui_app PROPERTIES IMPORTED_CONFIGURATIONS "Debug")
+    set_target_properties(imgui_app PROPERTIES COMPILE_PDB_NAME imgui_app COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_INSTALL_PREFIX}/lib" )
+  elseif("${CMAKE_BUILD_TYPE}" STREQUAL "RelWithDebInfo")
+    set_target_properties(imgui_app PROPERTIES IMPORTED_CONFIGURATIONS "RelWithDebInfo")
+    set_target_properties(imgui_app PROPERTIES COMPILE_PDB_NAME imgui_app COMPILE_PDB_OUTPUT_DIRECTORY "${CMAKE_INSTALL_PREFIX}/lib" )
+  endif()
+endif()
+
 #if(CPM_BUILD_TEST)
 #	file(GLOB example_sources 
 #		${CMAKE_CURRENT_SOURCE_DIR}/examples/app_main.cpp)
